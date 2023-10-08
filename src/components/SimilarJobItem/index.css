@@ -1,0 +1,34 @@
+.similar-job-container {
+  height: 300px;
+  width: 200px;
+  background-color: #7e858e;
+  border-radius: 10px;
+  padding: 10px;
+}
+.profile-container {
+  display: flex;
+  flex-direction: row;
+}
+.company-logo {
+  height: 40px;
+  width: 30px;
+}
+.job-title-container {
+  display: flex;
+  flex-direction: column;
+}
+.job-parameters {
+  color: #ffffff;
+}
+.rating-container {
+  display: flex;
+}
+.rating-star {
+  color: #fbbf24;
+  font-size: 20px;
+}
+
+.loc-details {
+  display: flex;
+  flex-direction: row;
+}

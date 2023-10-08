@@ -1,0 +1,59 @@
+.job-details-container {
+  height: 800px;
+  width: 600px;
+  border-radius: 10px;
+  background-color: #7e858e;
+}
+.profile-container {
+  display: flex;
+  flex-direction: row;
+}
+.company-logo {
+  height: 40px;
+  width: 30px;
+}
+.job-title-container {
+  display: flex;
+  flex-direction: column;
+}
+.job-parameters {
+  color: #ffffff;
+}
+.rating-container {
+  display: flex;
+}
+.rating-star {
+  color: #fbbf24;
+  font-size: 20px;
+}
+.separator {
+  color: #ffffff;
+}
+.sal-loc-container {
+  display: flex;
+  justify-content: space-between;
+}
+.loc-details {
+  display: flex;
+  flex-direction: row;
+}
+.description-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.skill-container {
+  display: flex;
+  flex-direction: row;
+}
+.skill-image {
+  height: 30px;
+  width: 30px;
+}
+.life-at-company-container {
+  display: flex;
+}
+.life-at-company-img {
+  height: 200px;
+  width: 200px;
+}

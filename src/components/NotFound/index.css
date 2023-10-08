@@ -1,0 +1,16 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.not-found-text {
+  color: #ffffff;
+}
+.retry-btn {
+  height: 30px;
+  width: 70px;
+  color: #ffffff;
+  background-color: blue;
+  border-radius: 5px;
+}

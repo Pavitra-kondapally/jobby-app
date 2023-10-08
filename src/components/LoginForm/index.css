@@ -1,0 +1,48 @@
+.container {
+  background-color: #272727;
+  height: 100vh;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.website-image {
+  height: 40px;
+  width: 100px;
+  margin: auto;
+}
+.username-input-field {
+  height: 40px;
+  width: 150px;
+  border-radius: 5px;
+}
+.login-form {
+  height: 300px;
+  width: 300px;
+  background-color: #64748b;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.input-label {
+  color: #f1f5f9;
+}
+.login-button {
+  height: 40px;
+  width: 150px;
+  border-radius: 5px;
+  background-color: #4f46e5;
+  color: #f8fafc;
+  text-align: center;
+}
+.error-message {
+  color: #ff0b37;
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
