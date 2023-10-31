@@ -1,11 +1,12 @@
 .similar-job-container {
-  height: 300px;
-  width: 200px;
+  height: 70vh;
+  width: 30vw;
   background-color: #7e858e;
   border-radius: 10px;
   padding: 10px;
+  margin: 10px;
 }
-.profile-container {
+.similar-job-profile-container {
   display: flex;
   flex-direction: row;
 }
@@ -31,4 +32,13 @@
 .loc-details {
   display: flex;
   flex-direction: row;
+}
+.similar-job-item {
+  display: inline-flexbox;
+}
+.email-icon {
+  color: #ffffff;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
 }

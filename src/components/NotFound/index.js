@@ -3,17 +3,14 @@ import './index.css'
 const NotFound = () => (
   <div className="not-found-container">
     <img
-      src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
-      className="failure-img"
-      alt="failure view"
+      src="https://assets.ccbp.in/frontend/react-js/jobby-app-not-found-img.png"
+      className="not-found-img"
+      alt="not found"
     />
-    <h1 className="not-found-text">Oops!Something Went Wrong</h1>
+    <h1 className="not-found-text">Page Not Found</h1>
     <p className="not-found-text">
-      We could not seem to find the page you are looking for.
+      we're sorry, the page you requested could not be found
     </p>
-    <button className="retry-btn" type="button">
-      Retry
-    </button>
   </div>
 )
 

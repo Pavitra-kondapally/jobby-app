@@ -1,8 +1,15 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: #272727;
+}
 .job-details-container {
-  height: 800px;
-  width: 600px;
+  height: 80%;
+  width: 90vw;
   border-radius: 10px;
   background-color: #7e858e;
+  padding: 10px;
 }
 .profile-container {
   display: flex;
@@ -56,4 +63,39 @@
 .life-at-company-img {
   height: 200px;
   width: 200px;
+}
+.failure-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.failure-image {
+  height: 300px;
+  width: 300px;
+}
+.failure-text {
+  color: #ffffff;
+}
+.retry-btn {
+  height: 40px;
+  width: 60px;
+  border-radius: 5px;
+  background-color: #6366f1;
+  color: #ffffff;
+}
+.similar-job-list {
+  list-style: none;
+}
+.skills-list {
+  display: inline-block;
+}
+.description-text {
+  color: #f8fafc;
+}
+.email-icon {
+  color: #ffffff;
+}
+.rating-text {
+  color: #ffffff;
 }

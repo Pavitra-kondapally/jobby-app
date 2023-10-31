@@ -6,12 +6,12 @@ import './index.css'
 const JobItem = props => {
   const {jobItemDetails} = props
   const {
-    company_logo_url,
-    employment_type,
-    job_description,
+    companyLogoUrl,
+    employmentType,
+    jobDescription,
     id,
     location,
-    package_per_annum,
+    packagePerAnnum,
     rating,
     title,
   } = jobItemDetails
@@ -21,7 +21,7 @@ const JobItem = props => {
       <li className="job-item-card">
         <div className="job-profile">
           <img
-            src={company_logo_url}
+            src={companyLogoUrl}
             className="company-logo"
             alt="company logo"
           />
@@ -37,13 +37,13 @@ const JobItem = props => {
           <div className="loc-details">
             <p className="company-title">{location}</p>
             <BsEnvelopeFill className="employment-icon" />
-            <p className="company-title">{employment_type}</p>
+            <p className="company-title">{employmentType}</p>
           </div>
-          <p className="company-title">{package_per_annum}</p>
+          <p className="company-title">{packagePerAnnum}</p>
         </div>
         <hr className="separator" />
-        <p className="company-title">Description</p>
-        <p className="company-title">{job_description}</p>
+        <h1 className="company-title">Description</h1>
+        <p className="company-title">{jobDescription}</p>
       </li>
     </Link>
   )

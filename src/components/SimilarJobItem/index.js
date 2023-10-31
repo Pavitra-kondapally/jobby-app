@@ -4,31 +4,39 @@ import './index.css'
 
 const SimilarJobItem = props => {
   const {similarJobDetails} = props
+  const {
+    companyLogoUrl,
+    title,
+    rating,
+    jobDescription,
+    location,
+    employmentType,
+  } = similarJobDetails
 
   return (
-    <li>
+    <li className="similar-job-item">
       <div className="similar-job-container">
-        <div className="profile-container">
+        <div className="similar-job-profile-container">
           <img
-            src={similarJobDetails.company_logo_url}
+            src={companyLogoUrl}
             className="company-logo"
             alt="similar job company logo"
           />
           <div className="job-title-container">
-            <h1 className="job-parameters">{similarJobDetails.title}</h1>
+            <h1 className="job-parameters">{title}</h1>
             <div className="rating-container">
               <BsFillStarFill className="rating-star" />
-              <p>{similarJobDetails.rating}</p>
+              <p>{rating}</p>
             </div>
           </div>
         </div>
         <h1 className="job-parameters">Description</h1>
-        <p className="job-parameters">{similarJobDetails.job_description}</p>
+        <p className="job-parameters">{jobDescription}</p>
 
         <div className="loc-details">
-          <p className="job-parameters">{similarJobDetails.location}</p>
-          <BsEnvelopeFill />
-          <p className="job-parameters">{similarJobDetails.employment_type}</p>
+          <p className="job-parameters">{location}</p>
+          <BsEnvelopeFill className="email-icon" />
+          <p className="job-parameters">{employmentType}</p>
         </div>
       </div>
     </li>

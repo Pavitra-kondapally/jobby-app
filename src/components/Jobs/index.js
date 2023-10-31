@@ -65,10 +65,10 @@ const jobsDataApiStatusConstants = {
 class Jobs extends Component {
   state = {
     profileContent: {},
-    jobsListDetails: {},
+    jobsListDetails: [],
     profileApiStatus: profileApiStatusConstants.initial,
     jobsDataApiStatus: jobsDataApiStatusConstants.initial,
-    employmentType: [],
+    selectedEmploymentType: [],
     salaryRange: '',
     searchInput: '',
   }
@@ -79,13 +79,14 @@ class Jobs extends Component {
   }
 
   getJobsData = async () => {
-    const {employmentType, salaryRange, searchInput} = this.state
+    const {selectedEmploymentType, salaryRange, searchInput} = this.state
     this.setState({
       jobsDataApiStatus: jobsDataApiStatusConstants.inProgress,
     })
 
     const jwtToken = Cookies.get('jwt_token')
-    const apiUrl = `https://apis.ccbp.in/jobs?employment_type=${employmentType}&minimum_package=${salaryRange}&search=${searchInput}`
+    const apiUrl = `https://apis.ccbp.in/jobs?employment_type=${selectedEmploymentType}&minimum_package=${salaryRange}&search=${searchInput}`
+    console.log(apiUrl)
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -95,7 +96,16 @@ class Jobs extends Component {
     const jobsResponse = await fetch(apiUrl, options)
     if (jobsResponse.ok === true) {
       const jobsFetchedData = await jobsResponse.json()
-      const jobsData = jobsFetchedData.jobs
+      const jobsData = jobsFetchedData.jobs.map(eachJob => ({
+        companyLogoUrl: eachJob.company_logo_url,
+        employmentType: eachJob.employment_type,
+        id: eachJob.id,
+        jobDescription: eachJob.job_description,
+        location: eachJob.location,
+        packagePerAnnum: eachJob.package_per_annum,
+        rating: eachJob.rating,
+        title: eachJob.title,
+      }))
       this.setState({
         jobsListDetails: jobsData,
         jobsDataApiStatus: jobsDataApiStatusConstants.success,
@@ -208,26 +218,31 @@ class Jobs extends Component {
   )
 
   renderSuccessJobDetailsView = () => {
-    const {jobsListDetails, employmentType} = this.state
-    const employmentTypeString = employmentType.join(',')
-    const sortedList = jobsListDetails.filter(
-      eachJob =>
-        eachJob.jobs &&
-        eachJob.jobs.employment_type &&
-        employmentTypeString.includes(eachJob.jobs.employment_type),
-    )
+    const {jobsListDetails, selectedEmploymentType, salaryRange} = this.state
+
+    console.log(jobsListDetails)
+
+    const intSalaryRange = parseInt(salaryRange)
+    const getSalaryInInt = salary => parseInt(salary.substring(0, 2))
+
+    // Filter the jobsListDetails based on the selected employment types and salary range
+    const updatedJobsList = jobsListDetails.filter(eachJob => {
+      const isSelected = selectedEmploymentType.includes(eachJob.employmentType)
+      const isSalaryInRange =
+        getSalaryInInt(eachJob.packagePerAnnum) > intSalaryRange
+
+      return true
+    })
+    console.log(updatedJobsList)
 
     return (
       <>
-        {sortedList.length === 0 ? (
+        {updatedJobsList.length === 0 ? (
           this.renderNoProductsView()
         ) : (
           <ul className="jobs-list">
-            {sortedList.map(eachJobItem => (
-              <JobItem
-                key={eachJobItem.id} // Add a unique key prop
-                jobItemDetails={eachJobItem}
-              />
+            {updatedJobsList.map(eachJobItem => (
+              <JobItem key={eachJobItem.id} jobItemDetails={eachJobItem} />
             ))}
           </ul>
         )}
@@ -262,18 +277,43 @@ class Jobs extends Component {
 
   onChangingEmploymentType = event => {
     console.log('Checkbox clicked')
-    const {employmentType} = this.state
+    const {selectedEmploymentType} = this.state
     const selectedType = event.target.value
-    const updatedEmploymentType = employmentType.includes(selectedType)
-      ? employmentType.filter(type => type !== selectedType)
-      : [...employmentType, selectedType]
 
+    // Check if the selected type is already in the array
+    if (selectedEmploymentType.includes(selectedType)) {
+      // If it's already in the array, remove it
+      const updatedEmploymentType = selectedEmploymentType.filter(
+        type => type !== selectedType,
+      )
+      this.setState(
+        {
+          selectedEmploymentType: updatedEmploymentType,
+        },
+        () => this.getJobsData(), // Call getJobsData in the callback
+      )
+      console.log(updatedEmploymentType)
+    } else {
+      // If it's not in the array, add it
+      this.setState(
+        prevState => ({
+          selectedEmploymentType: [
+            ...prevState.selectedEmploymentType,
+            selectedType,
+          ],
+        }),
+        () => this.getJobsData(), // Call getJobsData in the callback
+      )
+      console.log(selectedType)
+    }
+  }
+
+  onChangingSalaryRange = event => {
     this.setState(
-      {
-        employmentType: updatedEmploymentType,
-      },
-      this.getJobsData,
+      {salaryRange: event.target.value},
+      () => this.getJobsData(), // Call getJobsData in the callback
     )
+    console.log(event.target.value)
   }
 
   render() {
@@ -320,7 +360,7 @@ class Jobs extends Component {
           <div className="profile-filters-container">
             {profileInfo}
             <hr className="horizontal-separator" />
-            <h2 className="filter-style">Type of Employment</h2>
+            <h1 className="filter-style">Type of Employment</h1>
             <ul className="employment-list">
               {employmentTypesList.map(eachEmploymentType => (
                 <li key={eachEmploymentType.employmentTypeId}>
@@ -337,14 +377,16 @@ class Jobs extends Component {
               ))}
             </ul>
             <hr className="horizontal-separator" />
-            <h2 className="filter-style">Salary Range</h2>
+            <h1 className="filter-style">Salary Range</h1>
             <ul className="salary-list">
               {salaryRangesList.map(eachRange => (
                 <li key={eachRange.salaryRangeId}>
                   <input
                     type="radio"
+                    name="salary range"
                     id={eachRange.salaryRangeId}
                     value={eachRange.salaryRangeId}
+                    onChange={this.onChangingSalaryRange}
                   />
                   <label className="employment-type-label">
                     {eachRange.label}
